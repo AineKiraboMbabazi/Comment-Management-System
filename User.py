@@ -11,10 +11,10 @@ class User:
         users.append(user)
         print("User succefully signed up")
 
-    def login(self, username, password):
+    def login(self):
         for user in users:
-            if user.username == username:
-                if user.password == password:
+            if user.username == self.username:
+                if user.password == self.password:
                     return True
         return False
 

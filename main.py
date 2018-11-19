@@ -13,13 +13,14 @@ def main():
 
 
     login_prompt = input("Would You like to Login?  Enter: 1 for YES, 0 for NO ")
+    # text = "jb"
     if login_prompt == 1:
         username = input("Enter Username: ")
         password = input("Enter your password: ")
 
-        is_logged_in = User.login(username, password)
+        is_logged_in = user.login()
         if is_logged_in:
-            text = input("Enter your comment: ")
+            text = str(input("Enter your comment: "))
         else:
             print("You are not logged in: ")
             return
@@ -30,7 +31,28 @@ def main():
     user.create_comment(text)
 
     for comment in comments:
-        commentsList = {'username':comments.username, 'text':comment.text, 'timestamp':comment.timestamp}
-        print(commentsList)
+        print({'id': comment.id,'username': comment.username, 'text':comment.text, 'timestamp':comment.timestamp})
+
+
+    edit_ = input("Do you want to add another comment, edit or delete: 1 , 2 or 3")
+    if edit_ == 2:
+        get_id = input("Enter comment Id")
+        new_comment = str(input("Enter new comment"))
+        for item in comments:
+            if item.id == get_id:
+                item.text = new_comment
+                print(
+                {'id': item.id, 'username': item.username, 'text': item.text, 'timestamp': item.timestamp})
+        print("Your comment was updated.")
+
+    if edit_ == 3:
+        get_id = input("Enter comment Id")
+        for item in comments:
+            if item.id == get_id:
+                item.remove(get_id)
+                print(
+                    {'id': item.id, 'username': item.username, 'text': item.text, 'timestamp': item.timestamp})1
+        print ("Your comment was deleted")
+
 
 main()
